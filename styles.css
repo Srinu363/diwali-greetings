@@ -1,0 +1,229 @@
+/* Ultra Pro Max Base Styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+:root {
+  --primary-gold: #FFD700;
+  --secondary-orange: #FFA500;
+  --accent-red: #FF4D4D;
+  --deep-purple: #2D1A54;
+  --glow-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+}
+
+body {
+  background: linear-gradient(
+    135deg,
+    #0a0a20 0%,
+    #1a0f3c 30%,
+    #2d1a54 70%,
+    #3d2a64 100%
+  );
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+}
+
+/* Ultra Canvas Container */
+.canvas-container {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#fireworksCanvas {
+  width: 100%;
+  height: 100%;
+  filter: blur(1px);
+}
+
+/* Content Styles */
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: min(90%, 900px);
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px) saturate(1.8);
+  border-radius: 30px;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.2),
+    0 0 0 2px rgba(255, 215, 0, 0.15),
+    inset 0 0 64px rgba(255, 215, 0, 0.05);
+  animation: contentAppear 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Title Animation */
+.happy-diwali {
+  font-size: clamp(2rem, 7vw, 5rem);
+  font-weight: 800;
+  background: linear-gradient(
+    60deg,
+    var(--primary-gold) 0%,
+    var(--secondary-orange) 35%,
+    var(--accent-red) 75%,
+    var(--primary-gold) 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  color: transparent;
+  padding: 20px 15px; /* Added padding to fit text correctly */
+  border-radius: 15px;
+  animation: gradientMove 3s linear infinite,
+             glowPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
+}
+
+/* Institution Text */
+.institution {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin: 20px 0;
+  padding: 15px;
+  font-weight: 600;
+  text-align: center; /* Center the text */
+  text-shadow: 
+    0 0 12px rgba(255, 215, 0, 0.5),
+    0 0 24px rgba(255, 215, 0, 0.3);
+  background: linear-gradient(
+    45deg,
+    rgba(255, 215, 0, 0.1),
+    rgba(255, 165, 0, 0.1)
+  );
+  border-radius: 15px;
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  animation: slideUpFade 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.institution:nth-child(2) { animation-delay: 0.5s; }
+.institution:nth-child(3) { animation-delay: 1s; }
+
+/* Diya Container */
+.diya-container {
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0 50px;
+  z-index: 2;
+  animation: floatUp 1s ease-out forwards;
+}
+
+.diya {
+  width: 100px;
+  height: 100px;
+  filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.8));
+  animation: diyaFlicker 2s infinite alternate,
+             diyaFloat 3s ease-in-out infinite;
+}
+
+/* Sound Toggle */
+.sound-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 
+    0 5px 15px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 215, 0, 0.1);
+  color: white;
+}
+
+.sound-toggle:hover {
+  background: rgba(255, 215, 0, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.2),
+    0 0 0 2px rgba(255, 215, 0, 0.25);
+}
+
+/* Particles */
+.particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: particleRise 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 215, 0, 1),
+    rgba(255, 165, 0, 0.8) 50%,
+    rgba(255, 69, 0, 0) 100%
+  );
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+/* Keyframe Animations */
+@keyframes contentAppear { /* Content Fade In */
+  from { opacity: 0; transform: translate(-50%, -45%) scale(0.9); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes gradientMove { /* Title Gradient Shift */
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes glowPulse { /* Title Glow Pulse */
+  0%, 100% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3)); }
+  50% { filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.5)); }
+}
+
+@keyframes slideUpFade { /* Text Slide-Up Fade */
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes diyaFlicker { /* Diya Flickering Effect */
+  0%, 100% { filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.8)); }
+  50% { filter: drop-shadow(0 0 25px rgba(255, 165, 0, 1)); }
+}
+
+@keyframes diyaFloat { /* Diya Floating */
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes particleRise { /* Particles Rising */
+  0% { transform: translateY(100vh) scale(0); opacity: 1; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+}
+
+@keyframes floatUp { /* Diya Float Up */
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .content { padding: 2rem; }
+  .happy-diwali { font-size: clamp(1.5rem, 5vw, 3.5rem); }
+  .institution { font-size: clamp(1rem, 3vw, 2rem); }
+  .diya-container { padding: 0 20px; }
+}
